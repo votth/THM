@@ -1,0 +1,8 @@
+ICMP - internet control message protocol
+
+using `packets` to determine the performance of a connection between devices
+
+time taken for ICMP packets travelling between devices is meassured by `ping`
+
+    ping IP_address / web URL
+    ping example.com

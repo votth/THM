@@ -1,0 +1,86 @@
+DNS - domain name system
+    provides a simple way for humans to communicate with devices on the internet witout remembering complex numbers.
+    replacing server/destination IP addresses with `domain names`
+	like wanting to go to the tryhackme site, instead of going of 104.26.10.229, you can type tryhackme.com to goto it instead
+
+    max 253 characters
+
+Domain hierarchy
+
+    Root				    "."
+	Top-level		.edu	.com	.gov	.org	...
+	    Second-level    mit	    tryhackme	google	    army    ...
+
+    TLD - top-level domain
+	most righthand part of a domain name, for tryhackme.com the TLD is ".com"
+	2 types of TLD:
+
+	    gTLD - Generic Top-level Domain
+		Historically, gTLD was meant to tell the domain name's purpose, like .com for commercial, .org for organisation
+
+	    ccTLD - Country Code Top-level Domain
+		ccTLD on the other hand for geographical purposes, like .ca for Canda, .co.uk for United Kingdom
+
+	There are over 2000 TLDs: 
+	    https://data.iana.org/TLD/tlds-alpha-by-domain.txt
+
+    Second-level Domain
+	"tryhackme" is the second-level
+	Naming rules:
+	    limited to 63 characters + the TLD
+	    can only use a-z 0-9 and hypens "-"
+	    cannot start or end with hypens or have consecutive hypens
+
+    Subdomain
+	sits on the lefthand side of the Second-Level Domain using a period to separate it
+	admin.tryhackme.com, "admin" is the subdomain
+	same restrictions as second-level
+
+	You can have multiple subdomains separating by dots, there's no limit to how many, as long as the domain name stays under 254 characters (<= 253)
+
+
+------------
+Record Types
+
+    A	    resolve to IPv4 addresses
+    AAAA    resovle to IPv6 addresses
+    CNAME   resolve to another domain
+		TryHackMe's online shop subdomain is shop.tryhackme.com
+		which returns CNAME record of shops.shopify.com
+		Another DNS request would then be mdae to shops.shopify.com to work out the IP address
+    
+    MX	    resolve to the address of the servers that handle the email for the domain you are querying
+	    These records come with `priority flag` that tells the client in which order to try the servers, this is perfect for if the main server goes down and email needs to be sent to a backup server.
+
+    TXT	    are free text fields where any text-based data can be stored
+	    They have multiple uses, but some common ones can be
+		to list servers that have the authority to send an email on behalf of the domain (helps against spam and spoofed mails)
+		to verify ownership of the domain name when signing up for third party services
+
+
+--------------------
+Making a DNS reuest?
+
+    1.	You request a domain name
+	Your computer check its local cache to see if you've looked up the address recently; if not, a request to your Recursive DNS Server will be made
+
+    2.	A `Recurisve DNS Server` is usually provide by the ISP, but you can choose too.
+	This server also has its own cache of recently looked up domain names, if it's there then the server will send back to your computer and your request ends here
+
+	If the request is not found locally, then a journey begins to find the correct answer, starting with `the internet's root DNS servers`
+
+    3.	The `root servers` (A to M, are the root zone of the DNS of the internet), the backbone of the internet; their jobs is to redirect you, depending on your request (eg. to example.com), to the correct TLD Server that handles the required TLDs (eg. ".com")
+
+    4.	The `TLD server` holds records for where to find the `authoritative server` to answer the DNS request.
+	The `authoritative server` or the "nameserver" for the domain, like kip.ns.cloudflare.com or uma.ns.cloudflare.com
+	    There are multiple nameservers to 1 domain name to act as backups.
+
+    5.	An authoritative DNS server is the server that is responsible for storing the DNS records for a particular domain name and where any updates to your domain name DNS records would be made.
+
+	Depending on the Record Type, the DNS record is then sent back to the Recursive DNS Server, where a local copy will be cached for future requests and then relayed back to the original client that made the request (you)
+
+	DNS records all come with a TTL (Time To Live) value, this number represents in seconds that the response should be saved for locally until you have to look ip up again.
+
+	Caching saves on having to make a DNS request every time you communicate with a server.
+
+	    

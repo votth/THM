@@ -1,0 +1,115 @@
+echo
+whoami
+
+ls
+cd
+cat
+pwd
+
+find -name=nameOfFiles
+grep "what need to grep" /from/what/file
+
+Shell operators
+    &
+    &&
+    >
+    >>
+
+
+----------------------------------------
+
+
+SSH
+    allow remotely executing commands on another device
+    any sent data is encrypted
+
+Commands arguments: flags or aka switches
+
+Man(ual) page
+    ls	    -h for human-readable output
+
+touch
+mkdir
+cp
+mv
+rm
+file
+
+permission101	4 2 1 | read write execute
+
+su - swith user
+sudo / root
+su -l	to directly go to the new "user"'s home folder
+
+
+Common directories
+
+/etc - etcetera
+    one of the most important root dir
+    commonplace to store system files that are used by the OS
+	sudoers		contains list of users or groups that have permission to run sudo or a set of cmds as the root user
+	passwd	shadow	show how the OS stores the passwords of each user in encrypted formatting called `sha512`
+
+/var - variable data
+    one of the main root folders
+    stores data that is frequently accessed or written by services or applications running on the system
+	log files from running services and applications are written in /var/log
+	other data that is not necessarily associated with a specific user i.e. databases
+
+/root
+    unlike /home, /root is actually the home of the "root" system user. And that's it, there's nothing more to it than being the home of "root" user
+    ** note: the logical presumption is that this user would have their date in a dir such as /home/root by default
+
+/tmp - temporary
+    is a unique root dir
+    This dir is volatile and is used to store date that is only needed to be accessed once or twice, hence temporary
+    Its content, similar to memmory's are cleared when the computer restarts
+    ** Useful for pentesting: any user can write to this by default. Meaning once we have access, it serves as a good place to store things like our enumeration scripts.
+    
+
+----------------------------------------
+
+
+Terminal text editors
+    nano
+    vim / vi
+
+wget	download files with URLs
+SCP - secure copy
+    from SRC to DSR
+	scp /path/to/file user@remoteIP:/path/to/save
+    from REMOTE to SRC
+	scp user@remoteIP:/path/to/file /path/to/save
+
+Serving files from your host - WEB
+    python3 -m http.server
+    wget http://remoteIP:port/.flag.txt
+
+
+Processes101
+
+    Processes are programs that are running on your machine
+    Managed by the `kernel`, each process with have an ID, this ID is also known as PID
+	PID increments for the the order in which the process starts, i.e. the 60th process with have PID of 60
+
+    ps		to list running processes as current user's session
+    ps aux	to list processes ran by other users and those that don't run from session (system processes)
+
+    top / htop	other tools for viewing processes
+
+    kill PID	to stop a process
+	some other commands that correlate to exactly how "cleanly" the process is dealt with by the kernel
+	    SIGTERM	kill, but allows it to do some cleanup task beforehand
+	    SIGKILL	kill, doesn't cleanup
+	    SIGSTOP	stop/suspend a process
+
+How do processes start?
+
+Run at startup / Start on Boot
+    systemctl
+	start / stop
+	enable / disable
+
+THERE IS MORE BUT FINISH THE BOX FIRSRT, ELSE THE VB WILL RUN OUT OF TIME
+https://tryhackme.com/room/linuxfundamentalspart3
+

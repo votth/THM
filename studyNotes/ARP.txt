@@ -1,0 +1,24 @@
+ARP - address resolution protocol
+    the technology that allows devices to identify themselves on a network
+	simply allowing a device to associate its MAC with an IP
+	each device will keep a log of MAC addresses associated with other devices
+
+
+When a device wish to communicate with anotehr, they send out a `broadcast` to the entire network searching for the specific device
+
+
+How does ARP work?
+
+    Each device has a ledger to store information called `cache`.
+    In the context of ARP, this cache stores the identifiers of othe devices on the network.
+
+    In order to map MAC with IP, the ARP sends 2 types of messages
+	ARP Request	and	ARP Reply
+
+	ARP Request sends out broadcast asking whether or not the devices' MAC matches the requested IP. 
+	If one device does have the requested IP, it will send a ARP Reply back to the broadcasting/initial device.
+	The initial device will now store that in its cache/ARP Entry
+
+
+MAC address - physical identifier of a device
+IP  address - logical  identifier of a device

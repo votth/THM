@@ -1,0 +1,43 @@
+The act of splitting up a network into smaller, minature networks within itself. (for easier handling, troubleshooting)
+    assigning a specific parts of the network to each Department
+
+Subnetting is acheived by splitting up the number of `hosts` that can fit within the network, represented by a number called a `subnet mask`.
+
+
+IP addresses
+
+    made up of four section called `octets`
+	192 .	168 .	1   .	1
+	0-255	0-255	0-255	0-255
+    same for subnet mask, represnted as a number of four bytes (32bits), ranging from 0-255
+
+    Subnets use IP in 3 different ways:
+	identify the network address
+	identify the host address
+	identify the default `gateway`
+    
+		Purpose				    Explaination
+
+    Network	Identifies the start	    A device IP of 192.168.1.100
+    address	of the actual network	    belongs to the network of
+		And is used to identify		192.168.1.0
+		a network's existence
+
+    Host	Identfies a device	    A device can have IP
+    address	on the subnet		    ranging from
+						192.168.1.1-254
+
+    Default	Special address		    Any data that go out of the
+    gateway	assigned to device on	    subnet will be sent here.
+		the network, capable of	    This can use any number from
+		sending information to	    1 to 254, but usually is
+		another network			    1 or 254
+
+
+Subnetting benifits
+    - efficiency
+    - security
+    - full control
+
+
+

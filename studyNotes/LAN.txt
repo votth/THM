@@ -1,0 +1,58 @@
+`topology` - the design or look of the network
+
+Star
+
+Every devices connect through a central networking device, such as a `switch` or `hub`
+
+    - most commonly found
+    - reliability and scalability
+
+    - pricey, more cabling, purchase of dedicated networking equipments
+    - the more the network scales, the more maintainance is required
+    - harder to troubleshooting, prone to failure - albeit reduced
+
+
+Bus
+
+Devices rely on a single connection known as a `backbone cable`
+Similar to a leaf off a tree such that devices (leaves) stem from the where the branches are on this cable
+
+    - easier and more cost-efficient to setup
+
+    - prone to becoming slow, bottleneck, since every devies go through the same cable
+    - difficult troubleshooting since hard to determine which device is experiencing issues with all the data going to the same place
+    - little redundancy in place in case of failure, cause of having a single point of failure along the backbone cable can hinderance the connected devices
+
+
+Ring / Token
+
+Devices are connected directly to each other to form a loop/ring
+Data is sent across the loop until it reaches the dstined destination, using other devices along the loop to foward said data. * will only send/forward data from another device if the device itself doesn't have it already
+
+    - little cabling requirement
+    - less dependence on dedicated hardware compared to the Star
+    - fairly easy to trouble shoot since data only goes in 1 direction
+    - less prone to bottleneck compared to Bus
+
+    - inefficient in data travelling, since things might have to go through multiple other devices before reaching its destination
+    - a broken device will break the whole network
+
+------
+Switch
+
+Device in a network that is designed to aggregate multiple other devices, like computers, printers or anything networking-capable using `ethernet` cables.
+These various devices plug into a switch's `port`, ports number can be 4 8 16 24 32 or 64
+Is usually found in larger networks such as businesses, schools etc.
+
+Switch is much more efficient than their lesser couterpart (hub/repeater)
+    it keeps track of what device is connected to which port, so when packets are needed to send to a specific one, instead of sending to every ports like how hub used to do, switch will send to that one device --> help reduces traffic aross the network
+
+Switches and `routers` can be connected to one another, increasing the redundancy (reliability) of a network byt adding multiple paths for data to take. If one goes down, data can go through the other
+
+
+Router
+
+Jobs are connect networks and pass data between them by using `routing`
+
+Routing is the process of of data travelling across networks.
+This involves creating a path between networks so that said data can be delivered. Very useful when devices are connected by many paths.

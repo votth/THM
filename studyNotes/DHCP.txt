@@ -1,0 +1,9 @@
+DHCP - dynamic host configuration protocol
+    automatically assign IP addresses to devices
+
+    Process / DHCP packets:
+	DHCP Discover:	If a newly connected device join a network, it sends out a request to see if any DHCP servers are on the network
+	DHCP Offer  :	The DHCP replies back with an IP the device could use
+	DHCP Request:	The device confirms that it wants the avaialble IP
+	DHCP ACK    :	The DHCP server sends a reply acknowledging the request has been completed and the device can start using the IP ADR
+
