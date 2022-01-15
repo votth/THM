@@ -1,2 +1,1 @@
-# THM
-tryhackme notes
+# THM - tryhackme notes
