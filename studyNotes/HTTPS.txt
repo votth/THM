@@ -1,0 +1,244 @@
+HTTP - hyper text transfer protocol
+
+HTTPS - HTTP Secure
+
+    is used whenever you view a website
+    developed by Tim Berners-Lee and his team
+    1989-1991
+
+    HTTP is the set of rules for communicating with web servers for the transmitting of webpage data: HTML, Images, Videos, etc.
+
+    HTTPS secure version of HTTP
+	data is encrypted
+	stop people from seeing your data
+	assurances that you're connected to the correct webserver
+
+---
+Requests and Responses
+
+    When we access a website
+	Your browser makes requests to the webserver for assets like HTML, Images
+	Webserver responses and your brower downloads those assets
+
+    So where to tell the browser to access these resources/assets, using `URL`
+
+    URL - uniform resource locator
+	is predominantly an instruction on how to access a resource on the internet
+	example of URL with all of its features, which aren't all be used in every requests
+
+    http://user:password@tryhackme.com:80/view-room?id=1#task3
+
+    http	    scheme	    instructs on used protocol
+				    HTTP, HTTPS, `FTP`
+
+    user:password   user	    if services require authen
+
+    tryhackme.com   host/domain	    domain name or IP of server
+
+    80		    port	    port you're connecting to
+				    80 HTTP, 443 HTTPS
+				    or any port between 1-65535
+
+    view-room	    path	    file name or path to location
+				    of the resources
+
+    ?id=1	    query string    extra information, like
+				    accessing view room with ID 1
+
+    #task3	    fragment	    reference to a location on
+				    the actual page
+				    fairly common for long website
+				    let visitors jump directly to it
+
+---
+Making a Request
+
+    GET / HTTP/1.1
+
+    GET		the Request method
+    /		the page being requested
+    HTTP/1.1	the HTTP protocol version
+
+
+    For a richer website, other datas will be sent in as well, they are called `headers`
+	
+	GET / HTTP/1.1
+	Host: tryhackme.com
+	User-Agent: Mozilla/5.0 Firefox/87.0
+	Referer: https://tryhackme.com/
+	{blank line}
+
+	Line 1: The request is sending the `GET method`, request the home page with / and telling webserver we're using HTTP protocol
+	Line 2: It tells the webserver want the tryhackme.com website
+	Line 3: tells the webserver our browser version
+	Line 4: telling the webserer that the web page that referred us to this one is https://tryhackme.com/
+	**Line 5: HTTP requests always end with a blank line to inform the webserver that the request has finished
+
+    Example Response
+	
+	HTTP/1.1 200 OK
+	Server: nginx/1.15.8
+	Date: Fri, 09 Apr 2021 13:34:03 GMT
+	Content-Type: text/html
+	Content-Length: 98
+	{blank line}
+
+	<html>
+	<head>
+		<title>TryHackMe</title>
+	</head>
+
+	<body>
+		Welcome To TryHackMe.com
+	</body>
+	</html>
+
+	Line 1: the HTTP protocol the server is using
+		`HTTP Status Code` "200 OK" meaning the request has completed successfully
+	Line 2: the webeserver software and version number
+	Line 3: current date, time and timezone of the webserver
+	Line 4: the `Content-Type` header tells the client what sort of information is going to be sent, like HTML, Images, Videos, pdf, XML
+	Line 5: `Content-Length` tells the client how long the respone is, this way we can confirm no data is missing (or being added?)
+	Line 6: HTTP respone contain a blank line to confirm the end of the HTTP response
+	Line 7-14: the information that has been requested, in this case, the homepage
+
+---
+HTTP Methods
+
+    are a way for the client to show their intended action when making an HTTP request
+
+    Below are some common methods, pay attention to GET and POST
+
+	GET Request	is used for getting information from a webserver
+
+	POST Request	used for submitting data to a webserver
+			potentially creating new records
+			i.e. login
+
+	PUT Request	submitting data to update information
+			i.e. updating login info
+
+	DELETE Request	for deleting information/records from webserver
+			i.e. delete account
+
+---
+HTTP Status Codes **important**
+
+    in HTTP responses, the first line always contain a status code informing the income of the requests and also pontentially how to handle it. There are 5 different ranges:
+
+	100-199	    Information Response
+	    No longer very common
+	    Are sent to tell the client the first part of their request has been accepted and they should continue sending the rest
+
+	200-299	    Success
+	    To tell the client their request was successful
+
+	300-399	    Redirection
+	    Used to redirect client's request to another resource
+	    can be to either a different webpage or completely diffrent website
+	
+	400-499	    Errors
+	    To inform errors in client' request
+	    404	    Not Found
+	    403	    Forbidden, the webserver taken the request but refused to authorize.
+
+	500-599	    Server Errors
+	    For errors happening on the server-side
+	    Usually indicate quite a major problem with the server handling the request
+
+	
+	Common HTTP Status Codes
+
+	    200 OK
+		The request was completed sucessfully
+	    
+	    201 Created
+		A resource has been created
+
+	    301	Permanent Redirect
+		redirects the client's browser to a new webpage
+		or tells search engine that the page has moved elsewhere and to look there instead
+
+	    302 Temporary Redirect
+		Bit similar to 301 but only 'temporary' and may change again in the near future
+
+	    400 Bad Request
+		something was either wrong or missing in the Request
+		Could be that the webserver is requesting for resource but the client didn't send
+
+	    401 Not Authorised (yet)
+		not currently authorised to view the resource, commonly with username/password
+
+	    403 Fobidden
+		Whether logged in or not, you do not have permissions
+
+	    405 Method Not Allowed
+		The Request doesn't match with the resources
+		i.e. sending GET request to /creat-account while it's expecting POST instead
+
+	    404 Page Not Found
+		The page/resource requested does not exist
+
+	    500 Internal Service Error
+		The server has encountered some kind of error with the Request and doesn't know how to handle it
+
+	    503 Service Unavailable
+		Server cannot handle request as it's either overloaded or down for maintenance
+
+		
+---
+Headers
+
+    are additional bits of data client can send to webserver when maing requests
+    *no headers are strictly required when making a HTTP request, it'll be difficult to view a website properly
+
+
+    Common Request Headers
+
+	Host
+	    Some web servers host multiple websites, so this helps pointing to the one you want, else it will lead you to the default
+
+	User-Agent
+	    Your browser software and version number, helps the webserver decides on the webpage formatting to display it properly, cause some elements of HTML, JS, CSS are only available in certain brows
+
+	Content-Length
+	    sending data to a webserver such as in a form
+	    This tells the webserver how much data to expect in the web request, to ensure no missing data
+
+	Accept-Encoding
+	    Tells what types of compression methods the browser supporst so data can be made smaller for transmitting over the internet
+
+	Cookie
+	    data sent to the server to help remember your infomation
+	    more on this later
+
+
+    Common Response Headers
+	
+	Set-Cookie
+	    Information to store, which gets send back to the server
+
+	Cache-Control
+	    How long to store the content of the respone in the browser's cache, before needing to request it again
+
+	Content-Type
+	    telling what types of data is being sent, so the browser knows how to handle them
+
+	Content-Encoding
+	    what method was used to compress data before sending 
+	    so the browser can decompress it (?)
+
+
+    Cookie
+	
+	Cookies are saved when browser receive "Set-Cookie" hearder from the web server, they are stored on your computers/devices.
+	With every further requests, you'll send the cookie data back to the server, this is helpful because HTTP is `stateless` (doesn't keep track of your previous requests) which then reminds the webserver who you are, like personal settings, cart etc.
+
+	Cookies aren't usually in clear-text string, but represented by `token`, and isn't easily humanly-readable/guessable
+
+	Viewing cookies
+	    using developer tools in your browser: Ctrl-Shift-i / F12
+
+
+
+

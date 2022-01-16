@@ -1,0 +1,26 @@
+Long history dating back to 1985, and is the dominant operating system in both home use and corporate networks
+
+This makes Windows the primary target for hackers and malware writers.
+
+
+Windows XP	<3
+Windows Vista	disappoinment and an overhaul of XP glory
+
+Windows 7	comes after MS's announcement of XP end-of-life
+		Many were in panick-mode, Corps, Hospitals etc.
+		    testing scambling 7 against their hardware
+Windows 8	short-lived like Vista, even the phone version died
+
+Windows 10	still popular, soon to be replaced by 11, maybe
+		if history stands, 11 will be like Vista and 8
+		Comes with Home and Pro version, more info on their web
+		Was announced on June 2021, last updates on Oct 14 2025
+
+https://www.microsoft.com/en-us/windows/compare-windows-10-home-vs-pro
+    Differences: BitLocker encryption
+		 Windows Information Protection (WIP)
+
+Windows Server 2019	Offspring child
+
+Windows 11	Released on Oct 15 2021, currently MS's next big project
+
